@@ -2,11 +2,18 @@
 
 const express = require('express');
 const router = express.Router();
+const auth = require('../auth/middleware');
 
-router.get('/books', handleGetAll);
-router.get('/books/:id', handleGetOne);
+router.get('/books', auth, handleGetAll);
+router.get('/books/:id', auth, handleGetOne);
 
 // Route Handlers
+/**
+ * Gets all books in database
+ * @param {object} req 
+ * @param {object} res 
+ * @param {object} next 
+ */
 function handleGetAll(req, res, next) {
   let books = {
     count: 3,
@@ -19,6 +26,12 @@ function handleGetAll(req, res, next) {
   res.status(200).json(books);
 }
 
+/**
+ * Get one book out of database
+ * @param {Object} req 
+ * @param {Object} res 
+ * @param {Object} next 
+ */
 function handleGetOne(req, res, next) {
   let book = {
     title:'Moby Dick',
@@ -27,3 +40,5 @@ function handleGetOne(req, res, next) {
 }
 
 module.exports = router;
+
+

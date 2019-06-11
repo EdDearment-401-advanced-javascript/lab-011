@@ -4,6 +4,7 @@
 const express = require('express');
 const cors = require('cors');
 const morgan = require('morgan');
+const router = require('./routes/books');
 
 // Esoteric Resources
 const errorHandler = require( './middleware/error.js');
@@ -20,6 +21,8 @@ app.use(morgan('dev'));
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
 
+app.use(router);
+app.use(authRouter);
 // Catchalls
 app.use(notFound);
 app.use(errorHandler);
@@ -33,6 +36,7 @@ module.exports = {
       app.listen(port, () => {
         isRunning = true;
         console.log(`Server Up on ${port}`);
+        app.use(authRouter);
       });
     }
     else {
@@ -40,3 +44,4 @@ module.exports = {
     }
   },
 };
+
