@@ -7,6 +7,7 @@
 const mongoose = require('mongoose');
 const MongoMemoryServer = require('mongodb-memory-server').default;
 const supertest = require('supertest');
+const bcrypt = require('bcrypt');
 
 let mongoServer;
 
