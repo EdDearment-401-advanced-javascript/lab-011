@@ -3,6 +3,7 @@
 const supergoose = require('../../supergoose.js');
 const auth = require('../../../src/auth/middleware.js');
 const Users = require('../../../src/auth/users-model.js');
+const bcrypt = require('bcrypt');
 
 let users = {
   admin: {username: 'admin', password: 'password', role: 'admin'},

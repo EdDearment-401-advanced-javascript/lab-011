@@ -5,7 +5,7 @@ process.env.STORAGE = 'mongo';
 const jwt = require('jsonwebtoken');
 
 const server = require('../../../src/app.js').server;
-const supergoose = require('../../supergoose.js');
+const supergoose = require('../../supergoose');
 
 const mockRequest = supergoose.server(server);
 
@@ -31,6 +31,7 @@ describe('Auth Router', () => {
         return mockRequest.post('/signup')
           .send(users[userType])
           .then(results => {
+            console.log(jwt.verify(results.text, process.env.SECRET || 'changeit'));
             var token = jwt.verify(results.text, process.env.SECRET || 'changeit');
             id = token.id;
             encodedToken = results.text;
